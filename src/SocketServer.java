@@ -26,27 +26,14 @@ public class SocketServer {
                 System.out.println(e.toString());
             }
             finally {
-                if (null != client) {
-                    if (true == client.isConnected()) {
-                        try {
-                            client.close();
-                        }
-                        catch (IOException e) {
-                            System.out.println(e.toString());
-                        }
-                    }
-                }
-                
-                if (null != server) {
-                    if (false == server.isClosed()) {
+                if (null != server)
+                    if (false == server.isClosed())
                         try {
                             server.close();
                         }
                         catch (IOException e) {
                             System.out.println(e.toString());
                         }
-                    }
-                }
             }
         }
     }
