@@ -10,30 +10,25 @@ public class SocketServer {
         Socket client = null;
         byte[] buffer = null;
         
+        try {
+            server = new ServerSocket(7000);
+            client = server.accept();
+        }
+        catch (IOException e) {
+            System.out.println(e.toString());
+        }
+        
         while (true) {
             try {
-                server = new ServerSocket(7000);
-                client = server.accept();
                 inputStream = client.getInputStream();
                 buffer = new byte[20];
                 inputStream.read(buffer);
                 
                 String str = new String(buffer);
                 System.out.println(str);
-                inputStream.close();
             }
             catch (IOException e) {
                 System.out.println(e.toString());
-            }
-            finally {
-                if (null != server)
-                    if (false == server.isClosed())
-                        try {
-                            server.close();
-                        }
-                        catch (IOException e) {
-                            System.out.println(e.toString());
-                        }
             }
         }
     }
