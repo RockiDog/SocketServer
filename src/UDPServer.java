@@ -4,9 +4,10 @@ import java.net.DatagramSocket;
 import java.net.SocketException;
 
 public class UDPServer {
+    private final static int MAX_BUFFER_SIZE = 50;
     public static void main(String[] args) {
         int port = 7001;
-        byte[] buffer = new byte[50];
+        byte[] buffer = new byte[MAX_BUFFER_SIZE];
         
         try {
             DatagramSocket server = new DatagramSocket(port);
@@ -15,7 +16,7 @@ public class UDPServer {
             while (true) {
                 try {
                     server.receive(data);
-                    String message = new String(buffer).trim();
+                    String message = new String(buffer, 0, data.getLength());
                     System.out.println(message);
                 }
                 catch (IOException e) {
